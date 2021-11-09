@@ -1,0 +1,218 @@
+:root{
+  --text-color: #00807E;
+  --background-gray: #FAFAFA;
+  --text-gray: #818A91;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    box-sizing: border-box;
+}
+
+img{
+  max-width: 100%;
+  display: block;
+}
+/* 上半部 */
+.add-ticket{
+  max-width: 920px;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 120px auto 100px;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 12px;
+  padding: 60px 95px;
+}
+
+.image-area img{
+  margin-bottom: 21px;
+}
+
+h1.title{
+  color: var(--text-color);
+  font-size: 24px;
+  border-bottom: 3px solid var(--text-color);
+  font-weight: bold;
+  margin-bottom: 36px;
+}
+
+.input-area{
+  display: flex;
+  flex-direction: column;
+}
+
+.add-ticket-button{
+  align-items: flex-end;
+  font-size: 20px;
+  background-color: var(--text-color);
+  color: #ffffff;
+  border: 0;
+  padding: 10px 40px;
+  border-radius: 4.8px;
+}
+
+.add-ticket-button:hover{
+  background-color: #004E4D;
+  cursor: pointer;
+}
+
+.add-ticket-button:active{
+  background-color: var(--text-color);
+}
+
+.form-group{
+  margin-bottom: 16px;
+}
+
+.add-ticket-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-ticket-input label{
+  color: var(--text-color);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.add-ticket-input input,.add-ticket-input select,.add-ticket-input textarea{
+  width: 72%;
+  border: 0;
+  color: var(--text-gray);
+  border-bottom: 1px solid var(--text-color);
+  font-size: 16px;
+  background-color: var(--background-gray);
+  text-indent: .5rem;
+}
+
+.add-ticket-input input,.add-ticket-input select{
+  height: 38px;
+}
+
+.add-ticket-input textarea{
+  height: 111px;
+}
+
+
+/* 下半部 */
+.show-ticket{
+  background-color: var(--background-gray);
+  padding-top: 56px;
+  padding-bottom: 120px;
+}
+
+.show-ticket .container{
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-area{
+  display: flex;
+  align-items: center;
+  margin: 20px 130px;
+}
+
+.search-select{
+  border-radius: 4px;
+  border: 1px solid #CED4DA;
+  width: 255px;
+  height: 38px;
+  text-indent: 0.5rem;
+  font-size: 16px;
+  color: #818A91;
+}
+
+.search-area p {
+  color: #818A91;
+  font-size: 16px;
+  padding-left: 30px;
+}
+
+.card-area ul{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-left: 33px;
+}
+
+.card{
+  max-width: 350px;
+  border-radius: 4px;
+  border: 1px solid #DEE2E6;
+  box-shadow: 0px 3px 6px #00000029;
+  margin-right: 30px;
+  margin-top: 38px;
+}
+
+.card-top,.card-content{
+  position: relative;
+}
+
+.rate-tag, .area-tag{
+  position: absolute;
+  color: #ffffff;
+  border-radius: 0 4px 4px 0;
+}
+.area-tag{
+  padding: 8px 20px;
+  font-size: 20px;
+  background-color: #64C3BF;
+  top: -10px;
+}
+
+.rate-tag{
+  padding: 5px 8px;
+  font-size: 16px;
+  background-color: var(--text-color);
+  top: -15px;
+}
+
+.card-content{
+  background-color: #ffffff;
+}
+
+.card-content .intro{
+  padding: 20px;
+}
+
+.card-content .intro h3.title{
+  color: var(--text-color);
+  font-size: 24px;
+  border-bottom: 2px solid var(--text-color);
+  font-weight: bold;
+}
+
+.card-content .intro p{
+  color: #818A91;
+  margin-top: 16px;
+  letter-spacing: 0px;
+  min-height: 144px;
+}
+
+.card-content .marketing{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: var(--text-color);
+  padding-bottom: 14px;
+  font-weight: bold;
+}
+
+.card-content .marketing .last{
+  font-size: 16px;
+}
+
+.card-content .marketing .price{
+  display: flex;
+  align-items: center;
+}
+
+.card-content .marketing .price-num{
+  font-size: 32px;
+}
