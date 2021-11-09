@@ -121,9 +121,7 @@ function createCardItem(data) {
 
 // 創建全部的資料
 function createAllCardItem() {
-  data.forEach(item => {
-    createCardItem(item)
-  })
+  data.forEach(item => createCardItem(item))
 }
 
 // 清除全部的資料
