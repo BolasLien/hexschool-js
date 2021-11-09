@@ -20,6 +20,7 @@ img{
 .add-ticket{
   max-width: 920px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   margin: 120px auto 100px;
   box-shadow: 0px 3px 6px #00000029;
@@ -148,6 +149,11 @@ h1.title{
   box-shadow: 0px 3px 6px #00000029;
   margin-right: 30px;
   margin-top: 38px;
+}
+
+.card-top .pic{
+  min-width: 348px;
+  min-height: 242px;
 }
 
 .card-top,.card-content{

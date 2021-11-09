@@ -58,10 +58,18 @@ searchSelect.addEventListener('change', function () {
 addTicketButton.addEventListener('click', function (e) {
   e.preventDefault()
 
-  const checkList = [inputName.value, inputImage.value, inputArea.value, inputDescription.value, inputGroup.value, inputPrice.value, inputRate.value]
+  const checkList = [
+    inputName.value,
+    inputImage.value,
+    inputArea.value,
+    inputDescription.value,
+    inputGroup.value,
+    inputPrice.value,
+    inputRate.value,
+  ]
 
   // 檢查如果欄位是空的，就不新增東西
-  if(checkList.some(item=> !item)){
+  if (checkList.some(item => !item)) {
     alert('欄位輸入不正確，請正確輸入')
     return
   }
@@ -120,23 +128,19 @@ function createAllCardItem() {
 
 // 清除全部的資料
 function removeAllCardItem() {
-  document.querySelectorAll('.card-item').forEach(item => {
-    item.remove()
-  })
+  document.querySelectorAll('.card-item').forEach(item => item.remove())
 }
 
 // 取得地區資料
 function getAreaData(area) {
   removeAllCardItem()
 
+  let showCardItemList = []
   if (area === '全部地區') {
     createAllCardItem()
   } else {
-    data.forEach(item => {
-      if (area === item.area) {
-        createCardItem(item)
-      }
-    })
+    showCardItemList = data.filter(item => item.area === area)
+    showCardItemList.forEach(item => createCardItem(item))
   }
 
   // 本次搜尋幾筆
