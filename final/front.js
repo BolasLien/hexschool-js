@@ -49,6 +49,7 @@ function createProductCard(item) {
   originPrice.textContent = 'NT$' + item.origin_price
   nowPrice.textContent = 'NT$' + item.price
 
+  // 把這個商品加入購物車
   addBtn.addEventListener('click', function (e) {
     e.preventDefault()
     addCarts(item.id, 1)
@@ -85,6 +86,7 @@ function createCartsItem(item) {
   num.textContent = item.quantity
   totalPrice.textContent = `NT$${item.product.price * item.quantity}`
 
+  // 從購物車移除此項
   discardBtn.addEventListener('click', function (e) {
     e.preventDefault()
     removeCartsItem(item.id)
