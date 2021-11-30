@@ -10,7 +10,12 @@ const cartItemTemplate = document.querySelector('.cartItem')
 const finalTotal = document.querySelector('.finalTotal')
 const discardAllBtn = document.querySelector('.discardAllBtn')
 
-
+const userName = document.querySelector('#customerName')
+const userTel = document.querySelector('#customerPhone')
+const userEmail = document.querySelector('#customerEmail')
+const userAddress = document.querySelector('#customerAddress')
+const userPayment = document.querySelector('#tradeWay')
+const orderInfoBtn = document.querySelector('.orderInfo-btn')
 
 // 商品列表初始化
 function initProducts() {
@@ -56,13 +61,11 @@ function createProductCard(item) {
 function initCarts() {
   getCarts()
     .then(res => {
-      updateCarts(res.data.carts,res.data.finalTotal)
+      updateCarts(res.data.carts, res.data.finalTotal)
     })
     .catch(err => {
       console.log(err)
     })
-
-  cartItemTemplate.remove()
 }
 
 // 建立購物車的品項
@@ -90,20 +93,20 @@ function createCartsItem(item) {
 }
 
 // 刷新購物車
-function updateCarts(newCarts, finalTotalPrice = 0){
+function updateCarts(newCarts, finalTotalPrice = 0) {
   const allCartItem = document.querySelectorAll('.cartItem')
   allCartItem.forEach(item => {
     item.remove()
   })
 
   carts = newCarts
-  carts.forEach(item=>{
+  carts.forEach(item => {
     tableHead.insertAdjacentElement('afterend', createCartsItem(item))
   })
 
-  if(carts.length === 0) {
+  if (carts.length === 0) {
     let cartNull = cartItemTemplate.cloneNode(false)
-    cartNull.textContent = "購物車內沒有商品"
+    cartNull.textContent = '購物車內沒有商品'
     tableHead.insertAdjacentElement('afterend', cartNull)
   }
 
@@ -136,26 +139,59 @@ function addCarts(id, num) {
 
 // 移除購物車的東西
 function removeCartsItem(id = null) {
-  // 判斷是否有填 id
-  if(id === null) {
-    if(carts.length === 0) return //購物車已經沒東西了，不再打api
+  //購物車已經沒東西了，不再打api
+  if (carts.length === 0) {
+    alert('購物車已經沒東西了')
+    return
+  }
 
+  // 判斷是否有填 id
+  if (id === null) {
     deleteCartsAll()
-    .then(res => {
-      updateCarts(res.data.carts)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .then(res => {
+        updateCarts(res.data.carts)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   } else {
     deleteCartsByID(id)
+      .then(res => {
+        updateCarts(res.data.carts, res.data.finalTotal)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+}
+
+// 下單功能
+function placeOrder() {
+  if (carts.length === 0) {
+    alert('購物車沒有東西唷')
+    return
+  }
+
+  let user = {
+    name: userName.value,
+    tel: userTel.value,
+    email: userEmail.value,
+    address: userAddress.value,
+    payment: userPayment.value,
+  }
+
+  // 要驗證資料都過了才下單
+  console.log(user)
+
+  postOrders(user)
     .then(res => {
-      updateCarts(res.data.carts, res.data.finalTotal)
+      console.log(res)
+      initCarts()
+      alert('成功送出訂單囉')
     })
     .catch(err => {
       console.log(err)
     })
-  }
 }
 
 discardAllBtn.addEventListener('click', function (e) {
@@ -163,22 +199,10 @@ discardAllBtn.addEventListener('click', function (e) {
   removeCartsItem()
 })
 
-// 下單功能
-// let user = {
-//   name: '小名',
-//   tel: '02-00220022',
-//   email: 'elxam@gmail.com',
-//   address: '高雄市三民區有安街55號',
-//   payment: 'Apple pay',
-// }
-
-// postOrders(user)
-//   .then(res => {
-//     console.log(res)
-//   })
-//   .catch(err => {
-//     console.log(err)
-//   })
+orderInfoBtn.addEventListener('click', function (e) {
+  e.preventDefault()
+  placeOrder()
+})
 
 function init() {
   initProducts()
