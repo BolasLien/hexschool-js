@@ -21,7 +21,9 @@ const productSelect = document.querySelector('.productSelect')
 
 // 商品列表初始化
 function initProducts() {
-  productWrap.innerHTML = ''
+  productWrap.childNodes.forEach(item=>{
+    item.remove()
+  })
 
   // 取得產品列表
   getProducts()
@@ -193,7 +195,6 @@ function placeOrder() {
 
   postOrders(user)
     .then(res => {
-      console.log(res)
       initCarts()
       alert('成功送出訂單囉！')
     })
@@ -230,9 +231,5 @@ productSelect.addEventListener('change',function(e){
   })
 })
 
-function init() {
-  initProducts()
-  initCarts()
-}
-
-init()
+initProducts()
+initCarts()
