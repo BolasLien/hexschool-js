@@ -125,9 +125,15 @@ discardAllBtn.addEventListener('click', function (e) {
 function initChart() {
   let products = []
   // 展開產品列表
-  orderList.forEach(item => {
-    item.products.forEach(p => {
-      products.push(p)
+  orderList.forEach(order => {
+    order.products.forEach(product => {
+      // 列表已經有了就把數量加上去
+      if(products.some(e => product.title === e.title)) {
+        let item = products.find(e =>product.title === e.title)
+        item.quantity += product.quantity
+      } else {
+        products.push(product)
+      }
     })
   })
 
@@ -148,7 +154,7 @@ function initChart() {
   products.sort((a, b) => {
       return b.quantity - a.quantity
     }).forEach((item, index) => {
-      if (index > 2) {
+      if (index >= 3) {
         if (!topThreeProduct['其他']) {
           topThreeProduct['其他'] = 0
         }
@@ -160,6 +166,8 @@ function initChart() {
         }
       }
     })
+  console.log(products);
+  console.log(topThreeProduct);
 
   topThreeChartData = formatDataToC3(topThreeProduct)
 
