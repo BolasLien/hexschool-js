@@ -17,6 +17,8 @@ const userAddress = document.querySelector('#customerAddress')
 const userPayment = document.querySelector('#tradeWay')
 const orderInfoBtn = document.querySelector('.orderInfo-btn')
 
+const productSelect = document.querySelector('.productSelect')
+
 // 商品列表初始化
 function initProducts() {
   productWrap.innerHTML = ''
@@ -124,6 +126,7 @@ function addCarts(id, num) {
     patchCarts(cartItem.id, cartItem.quantity)
       .then(res => {
         updateCarts(res.data.carts, res.data.finalTotal)
+        alert('成功加入購物車！')
       })
       .catch(err => {
         console.log(err)
@@ -132,6 +135,7 @@ function addCarts(id, num) {
     postCarts(id, num)
       .then(res => {
         updateCarts(res.data.carts, res.data.finalTotal)
+        alert('成功加入購物車！')
       })
       .catch(err => {
         console.log(err)
@@ -152,6 +156,7 @@ function removeCartsItem(id = null) {
     deleteCartsAll()
       .then(res => {
         updateCarts(res.data.carts)
+        alert('成功從購物車移除！')
       })
       .catch(err => {
         console.log(err)
@@ -160,6 +165,7 @@ function removeCartsItem(id = null) {
     deleteCartsByID(id)
       .then(res => {
         updateCarts(res.data.carts, res.data.finalTotal)
+        alert('成功從購物車移除！')
       })
       .catch(err => {
         console.log(err)
@@ -189,7 +195,7 @@ function placeOrder() {
     .then(res => {
       console.log(res)
       initCarts()
-      alert('成功送出訂單囉')
+      alert('成功送出訂單囉！')
     })
     .catch(err => {
       console.log(err)
@@ -204,6 +210,24 @@ discardAllBtn.addEventListener('click', function (e) {
 orderInfoBtn.addEventListener('click', function (e) {
   e.preventDefault()
   placeOrder()
+})
+
+productSelect.addEventListener('change',function(e){
+  e.preventDefault()
+  document.querySelectorAll('.productCard').forEach(item=>{
+    item.remove()
+  })
+
+  let filterProduct = productList.filter(item=> {
+    if(this.value === '全部') {
+      return true
+    } else {
+      return item.category === this.value
+    }
+  })
+  filterProduct.forEach(item => {
+    productWrap.append(createProductCard(item))
+  })
 })
 
 function init() {
