@@ -166,22 +166,11 @@ function initChart() {
         }
       }
     })
-  console.log(products);
-  console.log(topThreeProduct);
 
   topThreeChartData = formatDataToC3(topThreeProduct)
 
   // 刷新圖表
   updateChart()
-}
-
-function unloadDataKeys(unloadData){
-  let keys = []
-  unloadData.forEach(item=>{
-    keys.push(item[0])
-  })
-
-  return keys
 }
 
 function formatDataToC3(origin) {
@@ -204,14 +193,17 @@ function updateChart() {
   let chartData = isTopThree ? topThreeChartData : categoryChartData
   let unloadData = isTopThree ? categoryChartData : topThreeChartData
 
+  let unloadDataKeys = []
+  unloadData.forEach(item=>{
+    unloadDataKeys.push(item[0])
+  })
+
   chart.load({
     columns: chartData,
-    unload: unloadDataKeys(unloadData),
+    unload: unloadDataKeys
   })
 }
 
 selectChart.addEventListener('change', updateChart)
-
-
 
 init()
