@@ -21,7 +21,8 @@ const productSelect = document.querySelector('.productSelect')
 
 // 商品列表初始化
 function initProducts() {
-  productWrap.childNodes.forEach(item=>{
+  // productWrap.innerHTML = ''
+  document.querySelectorAll('.productCard').forEach(item => {
     item.remove()
   })
 
@@ -190,9 +191,6 @@ function placeOrder() {
     payment: userPayment.value,
   }
 
-  // 要驗證資料都過了才下單
-  console.log(user)
-
   postOrders(user)
     .then(res => {
       initCarts()
@@ -213,14 +211,14 @@ orderInfoBtn.addEventListener('click', function (e) {
   placeOrder()
 })
 
-productSelect.addEventListener('change',function(e){
+productSelect.addEventListener('change', function (e) {
   e.preventDefault()
-  document.querySelectorAll('.productCard').forEach(item=>{
+  document.querySelectorAll('.productCard').forEach(item => {
     item.remove()
   })
 
-  let filterProduct = productList.filter(item=> {
-    if(this.value === '全部') {
+  let filterProduct = productList.filter(item => {
+    if (this.value === '全部') {
       return true
     } else {
       return item.category === this.value
