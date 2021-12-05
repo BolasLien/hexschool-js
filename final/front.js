@@ -183,6 +183,59 @@ function placeOrder() {
     return
   }
 
+  // 要驗證資料都過了才可以下單
+  const form = document.querySelector('.orderInfo-form')
+  const constraints = {
+    Email: {
+      presence: {
+        message: '是必填的欄位',
+      },
+      email: {
+        message: '請填入Email的格式',
+      },
+    },
+    姓名: {
+      presence: {
+        message: '是必填的欄位',
+      },
+      length: {
+        minimum: 2, // 名稱長度要超過 9
+        message: '至少要2個字以上',
+      },
+    },
+    寄送地址: {
+      presence: {
+        message: '是必填的欄位',
+      },
+    },
+    電話: {
+      presence: {
+        message: '是必填的欄位',
+      },
+      numericality: {
+        onlyInteger: true,
+        message: '請填入數字'
+      },
+      length: {
+        minimum: 9, // 名稱長度要超過 9
+        message: '至少要9位數',
+      },
+    },
+  }
+
+  let error = validate(form, constraints)
+  Object.keys(constraints).forEach(item => {
+    let orderInfoMessage = document.querySelector(`[data-message="${item}"]`)
+    if(error) {
+      orderInfoMessage.textContent = error[item] ? error[item][0] : ''
+    } else {
+      orderInfoMessage.textContent = ''
+    }
+  })
+
+  // 如果驗證沒過，就不執行後面的程式
+  if(error) return
+
   let user = {
     name: userName.value,
     tel: userTel.value,
